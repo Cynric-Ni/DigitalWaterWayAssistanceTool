@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数字航道养护工作质量评价分析</title>
+    <link rel="stylesheet" href="../static/index.css"/>
+</head>
+<body>
+    <header>
+         <script src="../static/jquery.js"></script>
+         <h1>数字航道养护工作质量评价分析</h1>
+         <div class="showTime">当前时间：2024年3月17 00时00分00秒</div>
+         <div class="swchange">今日汉口水位：{{ tod_sw }}米，较昨日变幅：{{ diff_sw }}米</div>
+         <script>
+            var t = null;
+            t = setTimeout(time, 1000); //開始运行
+            function time() {
+              clearTimeout(t); //清除定时器
+              dt = new Date();
+              var y = dt.getFullYear();
+              var mt = dt.getMonth() + 1;
+              var day = dt.getDate();
+              var h = dt.getHours(); //获取时
+              var m = dt.getMinutes(); //获取分
+              var s = dt.getSeconds(); //获取秒
+              document.querySelector(".showTime").innerHTML =
+                "当前时间：" +
+                y +
+                "年" +
+                mt +
+                "月" +
+                day +
+                " " +
+                h +
+                "时" +
+                m +
+                "分" +
+                s +
+                "秒";
+              t = setTimeout(time, 1000); //设定定时器，循环运行
+            }
+          </script>
+    </header>
+    
+    <section class="mainbox">
+        <!-- //左边 -->
+        <div class="column">
+          <!-- //左上 -->
+          <div class="panel bar">
+             <h2>航标基础信息质量</h2>
+             <div class="chart">图表</div>
+             <div class="panel-footer"></div>
+          </div>
+          <!-- //左中 -->
+          <div class="panel line">
+            <h2>水位站整点上数</h2>
+            <div class="chart">图表</div>
+            <div class="panel-footer"></div>
+         </div>
+         <!-- //左下 -->
+          <div class="panel pie">
+            <h2>航标碰损索赔</h2>
+            <div class="chart">图表</div>
+            <div class="panel-footer"></div>
+         </div>
+        </div>
+        
+        <!-- //中间 -->
+        <div class="column">
+          <!-- //上图 -->
+          <div class="panel bar0">
+            <h2>数字航道养护综合排名</h2>
+            <div class="chart"></div>
+            <div class="panel-footer"></div>
+          </div>
+          <!-- //中图 -->
+          <div class="panel line0">
+            <h2>航标失常恢复</h2>
+            <div class="chart"></div>
+            <div class="panel-footer"></div>
+          </div>
+          <!-- //下图 -->
+          <div class="midPanel bar2">
+            <h2>测绘效率完成情况(内业)</h2>
+            <div class="chart">图表</div>
+            <div class="panel-footer"></div>
+          </div>
+          <div class="midPanel bar3">
+            <h2>测绘效率完成情况（外业）</h2>
+            <div class="chart">图表</div>
+            <div class="panel-footer"></div>
+          </div>
+        </div>
+
+        <!-- //右边 -->
+        <div class="column">
+        <!-- //右上 -->
+          <div class="panel bar1">
+            <h2>航标清洁数量</h2>
+            <div class="chart"></div>
+            <div class="panel-footer"></div>
+          </div>
+        <!-- //右中 -->
+          <div class="panel line1">
+            <h2>航道尺度富余</h2>
+            <div class="chart">图表</div>
+            <div class="panel-footer"></div>
+       </div>
+       <!-- //右下 -->
+          <div class="panel pie1">
+            <h2>航标器材库存</h2>
+            <div class="chart">图表</div>
+            <div class="panel-footer"></div>
+          </div>
+        </div>
+    </section>    
+    <script src="../static/flexible.js"></script>
+    <script src="../static/echarts.min.js"></script>
+    <script src="../static/index.js"></script>
+</body>
+</html>
