@@ -182,11 +182,11 @@ def data_logic_proccs():
     #     json.dump(filtered_data_by_area, f, ensure_ascii=False, indent=4)
     #
     # print(f"JSON数据已保存到文件 {filename}")
-    print(type(filtered_data_by_area))
+    #print("分类数据类型是：",type(filtered_data_by_area))
     # 在筛选后的数据中添加 "HSMJZJ" 字段
     for area, rows in filtered_data_by_area.items():
         for row in rows:
-            hsmj_values = row["HSMJ"]
+            hsmj_values = row.get('HSMJ')
             #print(hsmj_values)
             #print(type(hsmj_values))
             if isinstance(hsmj_values, list):
@@ -209,7 +209,7 @@ def data_logic_proccs():
             #     row["WY-analysis"] = row["HSMJZJ"] / row["WY-DAYS"]
             # if "HSMJZJ" in row and row["HSMJZJ"] is not None and "NY-DAYS" in row and row["NY-DAYS"] is not None:
             #     row["NY-analysis"] = row["HSMJZJ"] / row["NY-DAYS"]
-    print(type(filtered_data_by_area))
+    print("分类数据是：",type(filtered_data_by_area))
     # 数据库连接配置
     db_config = {
         'host': 'localhost',

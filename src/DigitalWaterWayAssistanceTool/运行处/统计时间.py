@@ -1,4 +1,4 @@
-from SrcCode.运行处.sql import sqlConfig
+from .sql import sqlConfig
 from datetime import datetime, timedelta
 
 class 统计表():

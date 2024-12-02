@@ -1,9 +1,9 @@
-from SrcCode.运行处.航标基础信息准确率DB import 航标基础信息准确率
-from SrcCode.运行处.失常综合分析DB import 失常综合分析
-from SrcCode.运行处.sql import sqlConfig
+from .航标基础信息准确率DB import 航标基础信息准确率
+from .失常综合分析DB import 失常综合分析
+from .sql import sqlConfig
 from datetime import datetime, timedelta
-from SrcCode.运行处.水位完整率DB import 水位完整率
-from SrcCode.运行处.水位正常率DB import 水位正常率
+from .水位完整率DB import 水位完整率
+from .水位正常率DB import 水位正常率
 class 接口:
     #每天8点10分更新后台数据，如果当前时间在8点30分之前，输出前一天的数据
     检查结果_sqlsession, 检查结果_engine = sqlConfig.get_sql_session('检查结果')

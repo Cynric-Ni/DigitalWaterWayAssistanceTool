@@ -1,4 +1,4 @@
-from SrcCode.运行处.sql import sqlConfig
+from .sql import sqlConfig
 from sqlalchemy.orm import declarative_base
 from sqlalchemy import Column,String,text,Integer,Date,Float
 Base = declarative_base()

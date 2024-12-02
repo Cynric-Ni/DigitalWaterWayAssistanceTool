@@ -1,6 +1,6 @@
-from SrcCode.运行处.数据导出 import 数据导出
+from .数据导出 import 数据导出
 import pandas as pd
-from SrcCode.运行处.统计时间 import 统计表
+from .统计时间 import 统计表
 import numpy as np
 from sqlalchemy import text
 from datetime import datetime, timedelta

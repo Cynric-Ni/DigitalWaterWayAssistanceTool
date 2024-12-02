@@ -1,7 +1,7 @@
 from sqlalchemy import Column,String,Integer,DateTime,Float,text
 from sqlalchemy.orm import declarative_base
-from SrcCode.运行处.sql import sqlConfig
-from SrcCode.运行处.船舶轨迹查询 import 船舶轨迹查询
+from .sql import sqlConfig
+from .船舶轨迹查询 import 船舶轨迹查询
 Base = declarative_base()
 
 class 失常综合分析(Base):

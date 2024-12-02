@@ -1,12 +1,11 @@
 import json
-
 from flask import Flask
 from flask import render_template,jsonify
 from flask import request
 import SqlComm as sc
 import Crawl
 import GetData
-from 运行处.接口 import 接口
+from src.DigitalWaterWayAssistanceTool.运行处.接口 import 接口
 import threading
 from 运行处.main_定时任务 import  run_scheduler
 import CHData

@@ -1,8 +1,9 @@
 from bs4 import BeautifulSoup
 import pandas as pd
 import requests
-from requests.packages.urllib3.exceptions import InsecureRequestWarning
+from urllib3.exceptions import InsecureRequestWarning
 import Login
+import urllib3
 #访问分中心
 def visit_host(url):
     cookies = {
@@ -16,7 +17,7 @@ def visit_host(url):
         'Accept-Language': 'zh-CN,zh;q=0.9',
     }
     response = requests.get(url, headers=headers, cookies=cookies, verify=False)
-    requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
+    urllib3.disable_warnings(InsecureRequestWarning)
     return response
 #访问主中心
 def visit_zzx_host(url):
@@ -39,7 +40,7 @@ def visit_zzx_host(url):
     Data={'hide_data':'{"update_content":1}',
           'event_data':'{"name":""}'}
     response = requests.post(url, headers=headers, cookies=cookies,data=Data)
-    requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
+    urllib3.disable_warnings(InsecureRequestWarning)
     return response
 
 

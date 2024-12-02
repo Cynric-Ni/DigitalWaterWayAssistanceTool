@@ -1,6 +1,6 @@
 from sqlalchemy import Column,String,DateTime,Float,text,Integer,Date
 from sqlalchemy.orm import declarative_base
-from SrcCode.运行处.sql import sqlConfig
+from .sql import sqlConfig
 Base = declarative_base()
 
 class 航标基础信息准确率(Base):
