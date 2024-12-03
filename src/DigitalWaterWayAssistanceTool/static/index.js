@@ -508,123 +508,123 @@
   });
 })();
 
-//中二
-(function () {
-  var myChart = echarts.init(document.querySelector(".line0 .chart"));
-  var option = {
-    tooltip: {
-      trigger: "axis",
-      axisPointer: {
-        type: "shadow",
-      },
-    },
-    grid: {
-      left: "3%",
-      right: "4%",
-      bottom: "3%",
-      top: "3%",
-      containLabel: true,
-    },
-    xAxis: {
-      type: "value",
-      boundaryGap: [0, 0.01],
-    },
-    yAxis: {
-      type: "category",
-      data: ["蕲州", "黄石", "黄冈", "阳逻", "武汉", "金口", "簰洲", "大沙"],
-    },
-    series: [
-      {
-        name: "2011",
-        type: "bar",
-        data: [90, 60, 90, 70, 90, 90, 80, 90],
-      },
-    ],
-  };
-  myChart.setOption(option);
-  $(document).ready(function () {
-    $.getJSON("/get_data", function (data) {
-      //console.log(data); // 在控制台中打印接收到的数据
-      hbschf = data[10];
-      myChart.setOption({ series: [{ data: hbschf }] });
-      // 你可以在这里根据data执行更多的JavaScript代码
-    });
-  });
-  window.addEventListener("resize", function () {
-    myChart.resize();
-  });
-})();
-
-//中三
-(function () {
-  var myChart = echarts.init(document.querySelector(".pie0 .chart"));
-  const rawData = [
-    [100, 302, 301, 334, 390, 330, 320, 320],
-    [320, 132, 101, 134, 90, 230, 210, 320],
-    [220, 182, 191, 234, 290, 330, 310, 320],
-    [150, 212, 201, 154, 190, 330, 410, 320],
-    [820, 832, 901, 934, 1290, 1330, 1320, 320],
-  ];
-  const totalData = [];
-  for (let i = 0; i < rawData[0].length; ++i) {
-    let sum = 0;
-    for (let j = 0; j < rawData.length; ++j) {
-      sum += rawData[j][i];
-    }
-    totalData.push(sum);
-  }
-  const grid = {
-    left: 100,
-    right: 100,
-    top: 50,
-    bottom: 50,
-  };
-  const series = [
-    "Direct",
-    "Mail Ad",
-    "Affiliate Ad",
-    "Video Ad",
-    "Search Engine",
-  ].map((name, sid) => {
-    return {
-      name,
-      type: "bar",
-      stack: "total",
-      barWidth: "60%",
-      label: {
-        show: true,
-        formatter: (params) => Math.round(params.value * 1000) / 10 + "%",
-      },
-      data: rawData[sid].map((d, did) =>
-        totalData[did] <= 0 ? 0 : d / totalData[did]
-      ),
-    };
-  });
-  var option = {
-    legend: {
-      selectedMode: false,
-    },
-    grid: {
-      left: "5%",
-      right: "3%",
-      bottom: "12%",
-      top: "15%",
-      // containLabel: true
-    },
-    yAxis: {
-      type: "value",
-    },
-    xAxis: {
-      type: "category",
-      data: ["大沙", "簰洲", "金口", "武汉", "阳逻", "黄冈", "黄石", "蕲州"],
-    },
-    series,
-  };
-  myChart.setOption(option);
-  window.addEventListener("resize", function () {
-    myChart.resize();
-  });
-})();
+// //中二
+// (function () {
+//   var myChart = echarts.init(document.querySelector(".line0 .chart"));
+//   var option = {
+//     tooltip: {
+//       trigger: "axis",
+//       axisPointer: {
+//         type: "shadow",
+//       },
+//     },
+//     grid: {
+//       left: "3%",
+//       right: "4%",
+//       bottom: "3%",
+//       top: "3%",
+//       containLabel: true,
+//     },
+//     xAxis: {
+//       type: "value",
+//       boundaryGap: [0, 0.01],
+//     },
+//     yAxis: {
+//       type: "category",
+//       data: ["蕲州", "黄石", "黄冈", "阳逻", "武汉", "金口", "簰洲", "大沙"],
+//     },
+//     series: [
+//       {
+//         name: "2011",
+//         type: "bar",
+//         data: [90, 60, 90, 70, 90, 90, 80, 90],
+//       },
+//     ],
+//   };
+//   myChart.setOption(option);
+//   $(document).ready(function () {
+//     $.getJSON("/get_data", function (data) {
+//       //console.log(data); // 在控制台中打印接收到的数据
+//       hbschf = data[10];
+//       myChart.setOption({ series: [{ data: hbschf }] });
+//       // 你可以在这里根据data执行更多的JavaScript代码
+//     });
+//   });
+//   window.addEventListener("resize", function () {
+//     myChart.resize();
+//   });
+// })();
+//
+// //中三
+// (function () {
+//   var myChart = echarts.init(document.querySelector(".pie0 .chart"));
+//   const rawData = [
+//     [100, 302, 301, 334, 390, 330, 320, 320],
+//     [320, 132, 101, 134, 90, 230, 210, 320],
+//     [220, 182, 191, 234, 290, 330, 310, 320],
+//     [150, 212, 201, 154, 190, 330, 410, 320],
+//     [820, 832, 901, 934, 1290, 1330, 1320, 320],
+//   ];
+//   const totalData = [];
+//   for (let i = 0; i < rawData[0].length; ++i) {
+//     let sum = 0;
+//     for (let j = 0; j < rawData.length; ++j) {
+//       sum += rawData[j][i];
+//     }
+//     totalData.push(sum);
+//   }
+//   const grid = {
+//     left: 100,
+//     right: 100,
+//     top: 50,
+//     bottom: 50,
+//   };
+//   const series = [
+//     "Direct",
+//     "Mail Ad",
+//     "Affiliate Ad",
+//     "Video Ad",
+//     "Search Engine",
+//   ].map((name, sid) => {
+//     return {
+//       name,
+//       type: "bar",
+//       stack: "total",
+//       barWidth: "60%",
+//       label: {
+//         show: true,
+//         formatter: (params) => Math.round(params.value * 1000) / 10 + "%",
+//       },
+//       data: rawData[sid].map((d, did) =>
+//         totalData[did] <= 0 ? 0 : d / totalData[did]
+//       ),
+//     };
+//   });
+//   var option = {
+//     legend: {
+//       selectedMode: false,
+//     },
+//     grid: {
+//       left: "5%",
+//       right: "3%",
+//       bottom: "12%",
+//       top: "15%",
+//       // containLabel: true
+//     },
+//     yAxis: {
+//       type: "value",
+//     },
+//     xAxis: {
+//       type: "category",
+//       data: ["大沙", "簰洲", "金口", "武汉", "阳逻", "黄冈", "黄石", "蕲州"],
+//     },
+//     series,
+//   };
+//   myChart.setOption(option);
+//   window.addEventListener("resize", function () {
+//     myChart.resize();
+//   });
+// })();
 
 //右一 折线图
 var qxhb, yqxhb;

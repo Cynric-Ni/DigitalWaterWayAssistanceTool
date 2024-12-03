@@ -157,7 +157,7 @@ def data_logic_proccs():
             #
             # print(f"JSON数据已保存到文件 {filename}")
             # 转浮点
-            if "HSMJ" in row and row["HSMJ"] is not None:
+            if "HSMJ" in row and row.get("HSMJ")is not None: #row["HSMJ"]一定要改成get()因为HSMJ有null的数据
                 hsmj_values = row["HSMJ"]
                 if isinstance(hsmj_values, list):
                     # 将字符串数组中的每个字符串转换为浮点数
@@ -171,7 +171,7 @@ def data_logic_proccs():
 
     for area_rows in classified_data.values():
         for row in area_rows:
-            if "XDSJ" in row and row["XDSJ"] is not None and row["XDSJ"].year >= 2023:  #!!!!年份在这里
+            if "XDSJ" in row and row["XDSJ"] is not None and row["XDSJ"].year >= 2024:  #!!!!年份在这里
                 area = row["SSJG_ID"]  # 获取地区信息
                 if area in filtered_data_by_area:
                     filtered_data_by_area[area].append(row)
@@ -189,27 +189,28 @@ def data_logic_proccs():
             hsmj_values = row.get('HSMJ')
             #print(hsmj_values)
             #print(type(hsmj_values))
-            if isinstance(hsmj_values, list):
-                # 计算 "HSMJ" 数组中的数字总和
-                hsmj_sum = sum(hsmj_values)
-                # 如果总和小于等于 8，则将其值设为 8
-                row["HSMJZJ"] = max(hsmj_sum, 8)
-                print("HSMJZJ:", row["HSMJZJ"])
-            else:
-                # 如果 "HSMJ" 不是数组，则将其值转换为浮点数，并设为 "HSMJZJ"
-                row["HSMJZJ"] = max(float(hsmj_values), 8)
-            # 添加字段 "WY-DAYS" 和 "NY-DAYS"
-            # if "CGWYKS" in row and row["CGWYKS"] is not None and "CGWYJS" in row and row["CGWYJS"] is not None:
-            #     row["WY-DAYS"] = (row["CGWYJS"] - row["CGWYKS"]).days + 1
-            # if "CGTJSJ" in row and row["CGTJSJ"] is not None and "CGWYJS" in row and row["CGWYJS"] is not None:
-            #     row["NY-DAYS"] = (row["CGTJSJ"] - row["CGWYJS"]).days + 1
-            #
-            # # 添加字段 "WY-analysis" 和 "NY-analysis"
-            # if "HSMJZJ" in row and row["HSMJZJ"] is not None and "WY-DAYS" in row and row["WY-DAYS"] is not None:
-            #     row["WY-analysis"] = row["HSMJZJ"] / row["WY-DAYS"]
-            # if "HSMJZJ" in row and row["HSMJZJ"] is not None and "NY-DAYS" in row and row["NY-DAYS"] is not None:
-            #     row["NY-analysis"] = row["HSMJZJ"] / row["NY-DAYS"]
-    print("分类数据是：",type(filtered_data_by_area))
+            if hsmj_values:
+                if isinstance(hsmj_values, list):
+                    # 计算 "HSMJ" 数组中的数字总和
+                    hsmj_sum = sum(hsmj_values)
+                    # 如果总和小于等于 8，则将其值设为 8
+                    row["HSMJZJ"] = max(hsmj_sum, 8)
+                    print("HSMJZJ:", row["HSMJZJ"])
+                else:
+                    # 如果 "HSMJ" 不是数组，则将其值转换为浮点数，并设为 "HSMJZJ"
+                    row["HSMJZJ"] = max(float(hsmj_values), 8)
+            #添加字段 "WY-DAYS" 和 "NY-DAYS"
+            if "CGWYKS" in row and row["CGWYKS"] is not None and "CGWYJS" in row and row["CGWYJS"] is not None:
+                row["WY-DAYS"] = (row["CGWYJS"] - row["CGWYKS"]).days + 1
+            if "CGTJSJ" in row and row["CGTJSJ"] is not None and "CGWYJS" in row and row["CGWYJS"] is not None:
+                row["NY-DAYS"] = (row["CGTJSJ"] - row["CGWYJS"]).days + 1
+
+            # 添加字段 "WY-analysis" 和 "NY-analysis"
+            if "HSMJZJ" in row and row["HSMJZJ"] is not None and "WY-DAYS" in row and row["WY-DAYS"] is not None:
+                row["WY-analysis"] = row["HSMJZJ"] / row["WY-DAYS"]
+            if "HSMJZJ" in row and row["HSMJZJ"] is not None and "NY-DAYS" in row and row["NY-DAYS"] is not None:
+                row["NY-analysis"] = row["HSMJZJ"] / row["NY-DAYS"]
+    #print(filtered_data_by_area)
     # 数据库连接配置
     db_config = {
         'host': 'localhost',
@@ -275,15 +276,16 @@ def data_logic_proccs():
         poor_count = 0
         for row in rows:
             # 在筛选后的数据中计算不同等级数据的数量
-            wy_analysis = row["WY-analysis"]
-            if wy_analysis >= 8:
-                excellent_count += 1
-            elif wy_analysis >= 4:
-                good_count += 1
-            elif wy_analysis >= 2:
-                average_count += 1
-            else:
-                poor_count += 1
+            wy_analysis = row.get("WY-analysis")
+            if wy_analysis:
+                if wy_analysis >= 8:
+                    excellent_count += 1
+                elif wy_analysis >= 4:
+                    good_count += 1
+                elif wy_analysis >= 2:
+                    average_count += 1
+                else:
+                    poor_count += 1
         # 将每个地区的数据数量添加到相应的数组中
         i_excellent_data.append(excellent_count)
         i_good_data.append(good_count)
@@ -344,15 +346,17 @@ def data_logic_proccs():
         poor_count = 0
         for row in rows:
             # 在筛选后的数据中计算不同等级数据的数量
-            ny_analysis = row["NY-analysis"]
-            if ny_analysis >= 4:
-                excellent_count += 1
-            elif ny_analysis >= 2.6:
-                good_count += 1
-            elif ny_analysis >= 1.6:
-                average_count += 1
-            else:
-                poor_count += 1
+            ny_analysis = row.get("NY-analysis")
+            if ny_analysis:
+                if ny_analysis >= 4:
+                    excellent_count += 1
+                elif ny_analysis >= 2.6:
+                    good_count += 1
+                elif ny_analysis >= 1.6:
+                    average_count += 1
+                else:
+                    poor_count += 1
+
         # 将每个地区的数据数量添加到相应的数组中
         f_excellent_data.append(excellent_count)
         f_good_data.append(good_count)
@@ -395,7 +399,7 @@ def data_logic_proccs():
 
 def ch_get_data():
     # 更新数据库
-    data_logic_proccs()
+    #data_logic_proccs()
     # 数据库连接配置
     db_config = {
         'host': 'localhost',
